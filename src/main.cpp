@@ -15,19 +15,30 @@ pros::MotorGroup rightMotors({1, 2, 3}, pros::MotorGearset::blue);
 pros::Imu imu(11);
 Motor TopOutake(20);
 Motor lowsetIntake(15);
-Motor longTube(16);
- int aroundAllSpeed = 80;
-        
+Motor biggest_out(16);
+int globalSpeed = 80;
+int i , o , mid ;
+
+
+void intake_fwr(){
+    i = 127;
+}
+
+void intake_back(){
+    i = -127;
+}
+
+
 void brake(){
     TopOutake.brake();
-    longTube.brake();
+    biggest_out.brake();
     lowsetIntake.brake();
 }
-void intake(){
-    TopOutake.move(aroundAllSpeed);
-    lowsetIntake.move(-aroundAllSpeed);
-    longTube.move(-aroundAllSpeed);
-}
+// void intake(){
+//     TopOutake.move(globalSpeed);
+//     lowsetIntake.move(-globalSpeed);
+//     biggest_out.move(-globalSpeed);
+// }
 // horizontal tracking wheel encoder. Rotation sensor, port 20, not reversed
 pros::Rotation horizontalEnc(20);
 // vertical tracking wheel encoder. Rotation sensor, port 11, reversed
@@ -165,34 +176,34 @@ void opcontrol() {
         }
         else {
             if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1)){
-            intake();
+            intake_fwr();
             }
             else if (controller.get_digital((pros::E_CONTROLLER_DIGITAL_R2))) {
-            TopOutake.move(-aroundAllSpeed);
-            lowsetIntake.move(aroundAllSpeed);
-            longTube.move(aroundAllSpeed);
+            intake_back();
             }
             else{
                 brake();
             }
         
 		// if(controller.get_digital(E_CONTROLLER_DIGITAL_B)){
-		// 	TopOutake.move(aroundAllSpeed);
+		// 	TopOutake.move(globalSpeed);
 		// }//press B button to move [TopOutake motor fwd 100%]
 		// else if (controller.get_digital(E_CONTROLLER_DIGITAL_A)){
-		//      TopOutake.move(-aroundAllSpeed);
+		//      TopOutake.move(-globalSpeed);
 		// }//press A button to move[lowsetIntake fwd 100%]
 		// else if(controller.get_digital(E_CONTROLLER_DIGITAL_L1)){
-		// 	lowsetIntake.move(aroundAllSpeed);
+		// 	lowsetIntake.move(globalSpeed);
 		// }//press L1 button to move[lowsetIntake fwd 100%]
 		// else if(controller.get_digital(E_CONTROLLER_DIGITAL_L2)){
-		// 	lowsetIntake.move(-aroundAllSpeed);
+		// 	lowsetIntake.move(-globalSpeed);
 		// }//press L2 button to move[lowsetIntake rev -100%]
         // else if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1)){
-        //     longTube.move(aroundAllSpeed);
+        //     biggest_out
+        //.move(globalSpeed);
         // }
         // else if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)){
-        //     longTube.move(-aroundAllSpeed);
+        //     biggest_out
+        //.move(-globalSpeed);
         // }
         
         }

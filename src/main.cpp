@@ -21,11 +21,24 @@ int i , o , mid ;
 
 
 void intake_fwr(){
-    i = 127;
+    i = globalSpeed;
 }
 
 void intake_back(){
-    i = -127;
+    i = -globalSpeed;
+}
+
+void mid_roller_fwr(){
+    mid = globalSpeed;
+}
+void mid_roller_back(){
+    mid = -globalSpeed;
+}
+void outake_fwr(){
+    o = globalSpeed;
+}
+void outake_back(){
+    o = -globalSpeed;
 }
 
 
@@ -180,6 +193,18 @@ void opcontrol() {
             }
             else if (controller.get_digital((pros::E_CONTROLLER_DIGITAL_R2))) {
             intake_back();
+            }
+            else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
+            mid_roller_fwr();
+            }
+            else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
+            mid_roller_back();
+            }
+            else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_X)) {
+            outake_fwr();
+            }
+            else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_Y)) {
+            outake_back();
             }
             else{
                 brake();

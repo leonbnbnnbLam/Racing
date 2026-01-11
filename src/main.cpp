@@ -1,6 +1,7 @@
 #include "main.h"
 #include "lemlib/api.hpp" 
 #include "pros/adi.h"
+#include "pros/colors.hpp"
 #include "pros/device.hpp"
 #include "pros/misc.h"
 #include "pros/motors.hpp"
@@ -126,7 +127,8 @@ lemlib::Chassis chassis(drivetrain, linearController, angularController, sensors
 void initialize() {
     pros::lcd::initialize(); // initialize brain screen
     chassis.calibrate(); // calibrate sensors
-    get_all_devices();
+    pros::screen::get_pen();
+    pros::screen::draw_circle(50, 50, 100);
     // the default rate is 50. however, if you need to change the rate, you
     // can do the following.
     // lemlib::bufferedStdout().setRate(...);

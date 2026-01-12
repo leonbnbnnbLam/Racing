@@ -7,7 +7,7 @@
 #include "pros/motors.hpp"
 #include "pros/screen.h"
 #include "pros/screen.hpp"
-#include "f.h"
+#include "f.cpp"
  using namespace pros;
 std::vector<Motor> get_all_devices();
 

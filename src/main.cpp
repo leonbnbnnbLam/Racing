@@ -5,8 +5,8 @@
 #include "pros/device.hpp"
 #include "pros/misc.h"
 #include "pros/motors.hpp"
-#include "pros/screen.h"
 #include "pros/screen.hpp"
+#include "f.cpp"
  using namespace pros;
 std::vector<Motor> get_all_devices();
 
@@ -211,6 +211,8 @@ void opcontrol() {
             else{
                 brake();
             }
+
+            motor_move();
         
 		// if(controller.get_digital(E_CONTROLLER_DIGITAL_B)){
 		// 	TopOutake.move(globalSpeed);
